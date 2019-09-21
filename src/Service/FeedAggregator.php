@@ -39,10 +39,10 @@ class FeedAggregator {
     }
 
     /**
-     * Parse Article entites out of XML feed string
+     * Parse Article entities out of XML feed string
      *
      * @param string $data
-     * @return Aricle[]
+     * @return Article[]
      */
     public function parseFeed($data)
     {

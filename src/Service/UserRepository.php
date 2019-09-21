@@ -13,7 +13,7 @@ class UserRepository {
      */
     public function getByEmail($email)
     {
-        throw \Exception('Not implemented');
+        throw new \Exception('Not implemented');
     }
 
     /**
@@ -24,6 +24,6 @@ class UserRepository {
      */
     public function save(User $user)
     {
-        throw \Exception('Not implemented');
+        throw new \Exception('Not implemented');
     }
 }

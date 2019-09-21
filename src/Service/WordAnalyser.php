@@ -22,7 +22,7 @@ class WordAnalyser {
 
         $top = $this->findTopWords($words);
 
-        return \array_slice($top, 0, this::WORDS_TOP, true);
+        return \array_slice($top, 0, $this::WORDS_TOP, true);
     }
     
     /**
@@ -40,7 +40,7 @@ class WordAnalyser {
         $token = strtok($text, ' ,.!()/\\"\';:');
 
         while ($token !== FALSE) {
-            if (!\in_array(\strtolower($token), $commonWords)) {
+            if (!\in_array(\strtolower($token), $commonWords) && $token != '…') {
                 $tokens[] = \strtolower($token);
             }
             $token = strtok(' ,.!()/\\"\';:');
