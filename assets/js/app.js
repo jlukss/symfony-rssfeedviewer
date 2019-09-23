@@ -1,14 +1,43 @@
-/*
- * Welcome to your app's main JavaScript file!
- *
- * We recommend including the built version of this JavaScript file
- * (and its CSS file) in your base layout (base.html.twig).
- */
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom'
+import { Route, BrowserRouter } from 'react-router-dom';
+import Login from './components/Login';
+import Register from './components/Register';
+import Viewer from './components/Viewer';
+import SecureRoute from './components/SecureRoute';
 
-// any CSS you require will output into a single css file (app.css in this case)
 require('../css/app.css');
 
-// Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
-// const $ = require('jquery');
+class App extends Component {
 
-console.log('Hello Webpack Encore! Edit me in assets/js/app.js');
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            'isLoggedIn': document.cookie.indexOf('is_logged_in') > -1
+        }
+
+        this.setIsLoggedIn = this.setIsLoggedIn.bind(this);
+    }
+
+    setIsLoggedIn() {
+        document.cookie = 'is_logged_in=true';
+        this.setState({
+            'isLoggedIn': true
+        })
+    }
+
+    render() {
+        return (
+            <BrowserRouter>
+                <div>
+                    <Route exact path="/" render={(props) => <Login setIsLoggedIn={this.setIsLoggedIn} />} />
+                    <Route path='/register' component={Register}/>
+                    <SecureRoute path="/viewer" component={Viewer} isLoggedIn={this.state.isLoggedIn} />
+                </div>
+            </BrowserRouter>
+        )
+    }
+}
+
+ReactDOM.render(<App />, document.getElementById('root'))

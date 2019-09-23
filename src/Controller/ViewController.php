@@ -14,6 +14,8 @@ class ViewController extends AbstractController {
      */
     public function getFeed(FeedAggregator $feed, WordAnalyser $analyser)
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
         try {
             $articles = $feed->getHeadlines();
 

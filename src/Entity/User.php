@@ -82,9 +82,6 @@ class User implements UserInterface {
     
     /**
      * Removes sensitive data from the user.
-     *
-     * This is important if, at any given point, sensitive information like
-     * the plain-text password is stored on this object.
      */
     public function eraseCredentials() {
         $this->passwordHash = null;
@@ -93,18 +90,9 @@ class User implements UserInterface {
     /**
      * Returns the roles granted to the user.
      *
-     *     public function getRoles()
-     *     {
-     *         return ['ROLE_USER'];
-     *     }
-     *
-     * Alternatively, the roles might be stored on a ``roles`` property,
-     * and populated in any number of different ways when the user object
-     * is created.
-     *
      * @return (Role|string)[] The user roles
      */
     public function getRoles() {
-        return [];
+        return ['ROLE_USER'];
     }
 }

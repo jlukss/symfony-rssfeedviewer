@@ -2,11 +2,11 @@
 namespace App\Entity;
 
 class Article {
-    private $link;
+    public $link;
 
-    private $title;
+    public $title;
 
-    private $summary;
+    public $summary;
 
     /**
      * Setter for Article link

@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div id="root"></div>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('js/app') }}
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('js/app') }}
+{% endblock %}

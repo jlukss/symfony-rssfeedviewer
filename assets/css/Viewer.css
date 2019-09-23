@@ -1,0 +1,20 @@
+#headlines, #words {
+    margin: 20px 60px;
+    padding: 10px 30px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.headline {
+    margin: 30px 0;
+    border: 1px solid #fdcb6e;
+    padding: 5px 30px;
+    background-color: #ffeaa7;
+}
+
+.word {
+    color:#0984e3;
+    font-size: 24pt;
+    padding: 0 20px 0 0;
+    font-weight: bold;
+}

@@ -62,9 +62,7 @@ class SignUpController extends AbstractController {
         $data = [
             'type' => 'error',
             'message' => 'Please fix errors in the submitted form',
-            'errors' => [
-                $errors
-            ]
+            'errors' => $errors
         ];
 
         return new JsonResponse($data, 400);
@@ -83,7 +81,7 @@ class SignUpController extends AbstractController {
 
         if (count($errors) == 0) {
             $user = $this->userRepository->getByEmail($email);
-
+            
             return new JsonResponse($user === null, 200);
         }
 

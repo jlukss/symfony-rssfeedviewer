@@ -2,13 +2,22 @@
 namespace App\Tests\Controller;
 
 use App\Service\FeedAggregator;
+use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 class ViewControllerTest extends WebTestCase {
+    private $client = null;
+
+    public function setUp()
+    {
+        $this->client = static::createClient();
+    }
+
     public function testGetFeed()
     {
-        $client = static::createClient();
-
+        $this->logIn();
+        
         $mockFeed = $this->createPartialMock(FeedAggregator::class, ['getFeed']);
         $mockData = '<?xml version="1.0" encoding="UTF-8"?>
         <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
@@ -54,11 +63,30 @@ class ViewControllerTest extends WebTestCase {
         $container = self::$kernel->getContainer();
         $container->set('App\Service\FeedAggregator', $mockFeed);
 
-        $client->xmlHttpRequest('GET', '/feed/get');
+        $this->client->xmlHttpRequest('GET', '/feed/get');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $data = json_decode($client->getResponse()->getContent(), true);
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $data = json_decode($this->client->getResponse()->getContent(), true);
         $this->assertCount(2, $data['headlines']);
         $this->assertCount(10, $data['words']);
+    }
+
+    private function logIn()
+    {
+        $session = $this->client->getContainer()->get('session');
+
+        $firewallName = 'main';
+        // if you don't define multiple connected firewalls, the context defaults to the firewall name
+        // See https://symfony.com/doc/current/reference/configuration/security.html#firewall-context
+        $firewallContext = 'main';
+
+        // you may need to use a different token class depending on your application.
+        // for example, when using Guard authentication you must instantiate PostAuthenticationGuardToken
+        $token = new UsernamePasswordToken('admin', null, $firewallName, ['ROLE_USER']);
+        $session->set('_security_'.$firewallContext, serialize($token));
+        $session->save();
+
+        $cookie = new Cookie($session->getName(), $session->getId());
+        $this->client->getCookieJar()->set($cookie);
     }
 }

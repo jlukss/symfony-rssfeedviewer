@@ -29,7 +29,7 @@ class FeedAggregator {
      */
     public function getFeed()
     {
-        $data = \file_get_contents(this::FEED_URL);
+        $data = \file_get_contents($this::FEED_URL);
 
         if (!$data) {
             throw new \Exception('Error retrieving feed: ' . this::FEED_URL);

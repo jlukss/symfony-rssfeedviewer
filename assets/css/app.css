@@ -1,3 +1,50 @@
 body {
-    background-color: lightgray;
+    background-color: #3A3945;
+    font-family: 'Roboto', sans-serif;
+}
+
+.form .field {
+    margin-bottom: 1em;
+}
+
+.form .field label {
+    display: block;
+}
+
+.form .field input {
+    width: 90%;
+    border: 0 solid #989ca2;
+    border-width: 0 0 1px 0; 
+    line-height: 2em;
+    outline: none;
+}
+
+.form .field .ok {
+    color: #63a969;
+}
+
+.form .field .error {
+    color: #f44336;
+}
+
+.form button {
+    background-color: #989ca2;
+    color: #ffffff;
+    border-width: 0;
+    border-radius: 5px;
+    font-size: 13pt;
+    line-height: 2em;
+    font-weight: normal;
+    padding: 0 20px;
+    font-family: 'Roboto', sans-serif;
+    text-transform: uppercase;
+}
+
+.form .error {
+    color: #f44336;
+}
+
+.form a, .form a:visited {
+    color: #e09931;
+    padding: 0 30px;
 }

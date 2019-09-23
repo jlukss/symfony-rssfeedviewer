@@ -34,19 +34,13 @@ class WordAnalyser {
      */
     public function extractWords($headline, $commonWords)
     {
-        $text = strip_tags($headline->getTitle() . ' ' . $headline->getSummary());
+        $text = strtolower(strip_tags($headline->getTitle() . ' ' . $headline->getSummary()));
 
-        $tokens = [];
-        $token = strtok($text, ' ,.!()/\\"\';:');
+        preg_match_all('/[\w]{2,}/', $text, $tokens);
 
-        while ($token !== FALSE) {
-            if (!\in_array(\strtolower($token), $commonWords) && $token != '…') {
-                $tokens[] = \strtolower($token);
-            }
-            $token = strtok(' ,.!()/\\"\';:');
-        }
+        $words = array_diff($tokens[0], $commonWords);
         
-        return $tokens;
+        return $words;
     }
 
     /**

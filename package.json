@@ -1,5 +1,6 @@
 {
     "devDependencies": {
+        "@babel/preset-react": "^7.0.0",
         "@symfony/webpack-encore": "^0.28.0",
         "core-js": "^3.0.0",
         "regenerator-runtime": "^0.13.2",
@@ -14,9 +15,16 @@
         "build": "encore production --progress"
     },
     "dependencies": {
+        "@fortawesome/fontawesome-svg-core": "^1.2.24",
+        "@fortawesome/free-regular-svg-icons": "^5.11.1",
+        "@fortawesome/free-solid-svg-icons": "^5.11.1",
+        "@fortawesome/react-fontawesome": "^0.1.4",
+        "babel-polyfill": "^6.26.0",
+        "babel-preset-env": "^1.7.0",
         "babel-preset-react": "^6.24.1",
         "prop-types": "^15.7.2",
         "react": "^16.9.0",
-        "react-dom": "^16.9.0"
+        "react-dom": "^16.9.0",
+        "react-router-dom": "^5.0.1"
     }
 }
