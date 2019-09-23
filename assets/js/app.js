@@ -31,7 +31,7 @@ class App extends Component {
         return (
             <BrowserRouter>
                 <div>
-                    <Route exact path="/" render={(props) => <Login setIsLoggedIn={this.setIsLoggedIn} />} />
+                    <Route exact path="/" render={(props) => <Login setIsLoggedIn={this.setIsLoggedIn} {...props} />} />
                     <Route path='/register' component={Register}/>
                     <SecureRoute path="/viewer" component={Viewer} isLoggedIn={this.state.isLoggedIn} />
                 </div>

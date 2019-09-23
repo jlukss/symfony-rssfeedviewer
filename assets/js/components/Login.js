@@ -8,13 +8,16 @@ class Login extends Component {
     constructor(props) {
         super(props);
 
-        console.log(props);
+        let success = '';
+        if (this.props.location.state !== undefined) {
+            success = this.props.location.state.success
+        }
 
         this.state = {
             'email': '',
             'password': '',
             'error': '',
-            'login': false
+            'success': success
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -49,64 +52,69 @@ class Login extends Component {
             this.props.setIsLoggedIn();
 
             this.setState({
-                'error': '',
-                'login': true
+                'error': ''
             });
 
+
+            this.props.history.push('/viewer');
             return;
         }
 
         let json = await res.json();
 
         this.setState({
-            'error': json.message
+            'error': json.message,
+            'success': ''
         });
     }
 
     render() {
+        const renderSuccess = () => {
+            console.log(this.props.location);
+            if (this.state.success != '') {
+                return (<div className="success">{this.state.success}</div>)
+            }
+        }
         const renderError = () => {
             if (this.state.error != '') {
                 return (<div className="error">{this.state.error}</div>)
             }
         }
 
-        if(!this.state.login) {
-            return (
-                <div id="login" className="form">
-                    <form onSubmit={this.handleSubmit}>
-                        {renderError()}
-                        <div className="field">
-                            <label>Email</label>
-                            <input 
-                                id="email"
-                                autoFocus
-                                type="email"
-                                onChange={this.handleChange}
-                                value={this.state.email}
-                            />
-                        </div>
-                        <div className="field">
-                            <label>Password</label>
-                            <input 
-                                id="password"
-                                onChange={this.handleChange}
-                                value={this.state.password}
-                                type="password"
-                            />
-                        </div>
-                        <button
-                            disabled={!this.validateForm()}
-                            type="submit"
-                        >
-                            Login
-                        </button>
-                        <Link to="/register">Register</Link>
-                    </form>
-                </div>
-            )
-        } else {
-            return <Redirect to="/viewer" />
-        }
+        return (
+            <div id="login" className="form">
+                <form onSubmit={this.handleSubmit}>
+                    {renderSuccess()}
+                    {renderError()}
+                    <div className="field">
+                        <label>Email</label>
+                        <input 
+                            id="email"
+                            autoFocus
+                            type="email"
+                            onChange={this.handleChange}
+                            value={this.state.email}
+                        />
+                    </div>
+                    <div className="field">
+                        <label>Password</label>
+                        <input 
+                            id="password"
+                            onChange={this.handleChange}
+                            value={this.state.password}
+                            type="password"
+                        />
+                    </div>
+                    <button
+                        disabled={!this.validateForm()}
+                        type="submit"
+                    >
+                        Login
+                    </button>
+                    <Link to="/register">Register</Link>
+                </form>
+            </div>
+        )
     }
 }
 

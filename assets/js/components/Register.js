@@ -175,7 +175,12 @@ class Register extends Component {
             </div>
             )
             } else {
-                return <Redirect to="/" />
+                return <Redirect to={{
+                    pathname: "/",
+                    state: {
+                        success: "User created: " + this.state.email
+                    }
+                }} />
             }
     }
 }

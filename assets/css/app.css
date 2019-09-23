@@ -38,6 +38,15 @@ body {
     padding: 0 20px;
     font-family: 'Roboto', sans-serif;
     text-transform: uppercase;
+    cursor: pointer;
+}
+.form button:disabled {
+    cursor: default;
+    color: #ccc;
+}
+
+.form .success {
+    color: #63a969;
 }
 
 .form .error {
