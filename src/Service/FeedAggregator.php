@@ -4,13 +4,14 @@ namespace App\Service;
 use App\Entity\Article;
 use Psr\Log\LoggerInterface;
 
-class FeedAggregator {
+class FeedAggregator
+{
     const FEED_URL = 'https://www.theregister.co.uk/software/headlines.atom';
 
     /**
      * Get headlines of articles
      *
-     * @return Aricle[]
+     * @return Article[]
      */
     public function getHeadlines()
     {
@@ -55,7 +56,7 @@ class FeedAggregator {
         }
 
         if (isset($feed->entry)) {
-            foreach($feed->entry as $entry) {
+            foreach ($feed->entry as $entry) {
                 $headlines[] = $this->_parseEntry($entry);
             }
         }
@@ -63,6 +64,12 @@ class FeedAggregator {
         return $headlines;
     }
 
+    /**
+     * Create Article from XML data
+     *
+     * @param SimpleXMLElement $entry
+     * @return Article
+     */
     private function _parseEntry($entry)
     {
         $headline = new Article();

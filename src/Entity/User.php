@@ -5,7 +5,8 @@ namespace App\Entity;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-class User implements UserInterface {
+class User implements UserInterface
+{
     /**
      * @Assert\Email(groups={"Default","validation"})
      * @Assert\NotBlank(groups={"Default","validation"})
@@ -25,7 +26,8 @@ class User implements UserInterface {
      * @param string $email
      * @return void
      */
-    public function setEmail($email) {
+    public function setEmail($email)
+    {
         $this->email = $email;
     }
 
@@ -35,7 +37,8 @@ class User implements UserInterface {
      * @param string $passwordHash
      * @return void
      */
-    public function setPassword($password) {
+    public function setPassword($password)
+    {
         $this->passwordHash = $password;
     }
 
@@ -83,7 +86,8 @@ class User implements UserInterface {
     /**
      * Removes sensitive data from the user.
      */
-    public function eraseCredentials() {
+    public function eraseCredentials()
+    {
         $this->passwordHash = null;
     }
     
@@ -92,7 +96,8 @@ class User implements UserInterface {
      *
      * @return (Role|string)[] The user roles
      */
-    public function getRoles() {
+    public function getRoles()
+    {
         return ['ROLE_USER'];
     }
 }

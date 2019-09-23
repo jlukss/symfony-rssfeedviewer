@@ -6,7 +6,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
-class UserRepository implements UserProviderInterface {
+class UserRepository implements UserProviderInterface
+{
     private $params;
 
     public function __construct(ParameterBagInterface $params = null)
@@ -26,12 +27,13 @@ class UserRepository implements UserProviderInterface {
     }
 
     /**
-     * Refresh user session
+     * Refresh user session, we don not change user data
      *
      * @param UserInterface $user
      * @return User
      */
-    public function refreshUser(UserInterface $user) {
+    public function refreshUser(UserInterface $user)
+    {
         return $user;
     }
 
@@ -70,7 +72,7 @@ class UserRepository implements UserProviderInterface {
     public function save(User $user)
     {
         $handle = $this->_openFile('a');
-        $data = implode("\t" , [$user->getEmail(), $user->getPassword()]);
+        $data = implode("\t", [$user->getEmail(), $user->getPassword()]);
         fwrite($handle, $data . "\n");
         fclose($handle);
         return true;

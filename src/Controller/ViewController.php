@@ -8,7 +8,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class ViewController extends AbstractController {
+class ViewController extends AbstractController
+{
     /**
      * @Route("/feed/get")
      */
@@ -19,7 +20,7 @@ class ViewController extends AbstractController {
         try {
             $articles = $feed->getHeadlines();
 
-            $commonWords = explode("\n", file_get_contents($this->getParameter('kernel.project_dir') . '/data/commonwords.txt'));
+            $commonWords = file($this->getParameter('kernel.project_dir') . '/data/commonwords.txt', FILE_IGNORE_NEW_LINES);
             
             $words = $analyser->getWords($articles, $commonWords);
         

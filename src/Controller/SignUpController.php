@@ -13,25 +13,27 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-class SignUpController extends AbstractController {
-    
+class SignUpController extends AbstractController
+{
     private $userRepository;
 
-    public function __construct(UserRepository $userRepository) {
+    public function __construct(UserRepository $userRepository)
+    {
         $this->userRepository = $userRepository;
     }
 
     /**
      * @Route("/user/signup")
      */
-    public function signUp(Request $request, UserPasswordEncoderInterface $passwordEncoder) {
+    public function signUp(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    {
         $data = json_decode($request->getContent(), true);
 
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
         $form->submit($data);
 
-        if($this->userRepository->getByEmail($user->getEmail()) !== null) {  
+        if ($this->userRepository->getByEmail($user->getEmail()) !== null) {
             $data = [
                 'type' => 'error',
                 'message' => 'User already exists',
@@ -41,7 +43,7 @@ class SignUpController extends AbstractController {
             return new JsonResponse($data, 400);
         }
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $user->setPassword(
                 $passwordEncoder->encodePassword(
                     $user,

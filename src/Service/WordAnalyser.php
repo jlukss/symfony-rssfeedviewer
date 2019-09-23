@@ -3,7 +3,8 @@ namespace App\Service;
 
 use App\Entity\Article;
 
-class WordAnalyser {
+class WordAnalyser
+{
     const WORDS_TOP = 10;
 
     /**
@@ -16,7 +17,7 @@ class WordAnalyser {
     {
         $words = [];
         
-        foreach($headlines as $headline) {
+        foreach ($headlines as $headline) {
             $words = \array_merge($words, $this->extractWords($headline, $commonWords));
         }
 
@@ -44,7 +45,7 @@ class WordAnalyser {
     }
 
     /**
-     * Return words and they count in descending order
+     * Return words and their count in descending order
      *
      * @param string[] $words
      * @return array

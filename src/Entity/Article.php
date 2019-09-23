@@ -1,7 +1,8 @@
 <?php
 namespace App\Entity;
 
-class Article {
+class Article
+{
     public $link;
 
     public $title;
@@ -14,7 +15,8 @@ class Article {
      * @param string $value
      * @return void
      */
-    public function setLink($value) {
+    public function setLink($value)
+    {
         $this->link = $value;
     }
     
@@ -23,7 +25,8 @@ class Article {
      *
      * @return string
      */
-    public function getLink() {
+    public function getLink()
+    {
         return $this->link;
     }
 
@@ -33,7 +36,8 @@ class Article {
      * @param string $value
      * @return void
      */
-    public function setTitle($value) {
+    public function setTitle($value)
+    {
         $this->title = $value;
     }
     
@@ -42,7 +46,8 @@ class Article {
      *
      * @return string
      */
-    public function getTitle() {
+    public function getTitle()
+    {
         return $this->title;
     }
 
@@ -52,7 +57,8 @@ class Article {
      * @param string $value
      * @return void
      */
-    public function setSummary($value) {
+    public function setSummary($value)
+    {
         $this->summary = $value;
     }
     
@@ -61,8 +67,8 @@ class Article {
      *
      * @return string
      */
-    public function getSummary() {
+    public function getSummary()
+    {
         return $this->summary;
     }
-
 }
